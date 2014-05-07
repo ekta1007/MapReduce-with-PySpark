@@ -4,11 +4,14 @@ import os
 from pyspark import SparkContext
 
 # json = list of dict of dict in this input
+# hello world in spark
+
+
 def time_day(json):
 	time_day="N/A"
 	if json.has_key('source'):
 		source = json['source']
-		if source.has_key('istdt') : #and source['app_id'] != "":
+		if source.has_key('istdt') : 
 			time_day = int(source['istdt'].split()[-1].split(":")[0])
 	return (source['istdt'], time_day)
 
@@ -22,5 +25,4 @@ if __name__ == "__main__":
 	list_dict = lines.map(lambda x: json.loads(x)).map(time_day)
 	list_dict.collect() # will list all the required data that you wanted to convert 
 		
-# hello world in spark
 
